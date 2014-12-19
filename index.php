@@ -481,13 +481,14 @@ function generate_main_dashboard_XML($project_instance, $date)
           $xml .= add_XML_value("ntestpass",$DependProject->GetNumberOfPassingTests($beginning_UTCDate,$end_UTCDate));
           $xml .= add_XML_value("ntestfail",$DependProject->GetNumberOfFailingTests($beginning_UTCDate,$end_UTCDate));
           $xml .= add_XML_value("ntestnotrun",$DependProject->GetNumberOfNotRunTests($beginning_UTCDate,$end_UTCDate));
-          if(strlen($DependProject->GetLastSubmission()) == 0)
+          $lastSubmission = $DependProject->GetLastSubmission();
+          if(strlen($lastSubmission) == 0)
             {
             $xml .= add_XML_value("lastsubmission","NA");
             }
           else
             {
-            $xml .= add_XML_value("lastsubmission",$DependProject->GetLastSubmission());
+            $xml .= add_XML_value("lastsubmission",$lastSubmission);
             }
           $rowparity = ($rowparity==1) ? 0:1;
           $xml .= "</dependency>";
@@ -1811,13 +1812,14 @@ function generate_subprojects_dashboard_XML($project_instance, $date)
   $xml .= add_XML_value("ntestpass",$Project->GetNumberOfPassingTests($beginning_UTCDate,$end_UTCDate));
   $xml .= add_XML_value("ntestfail",$Project->GetNumberOfFailingTests($beginning_UTCDate,$end_UTCDate));
   $xml .= add_XML_value("ntestnotrun",$Project->GetNumberOfNotRunTests($beginning_UTCDate,$end_UTCDate));
-  if(strlen($Project->GetLastSubmission()) == 0)
+  $lastSubmission = $Project->GetLastSubmission();
+  if(strlen($lastSubmission) == 0)
     {
     $xml .= add_XML_value("lastsubmission","NA");
     }
   else
     {
-    $xml .= add_XML_value("lastsubmission",$Project->GetLastSubmission());
+    $xml .= add_XML_value("lastsubmission",$lastSubmission);
     }
   $xml .= "</project>";
 
@@ -1922,13 +1924,14 @@ function generate_subprojects_dashboard_XML($project_instance, $date)
                    $subprojProp[$subprojectid][$reportnum] : 0;
       $xml .= add_XML_value($reportnum, $reportval);
       }
-    if(strlen($SubProject->GetLastSubmission()) == 0)
+    $lastSubmission = $SubProject->GetLastSubmission();
+    if(strlen($lastSubmission) == 0)
       {
       $xml .= add_XML_value("lastsubmission","NA");
       }
     else
       {
-      $xml .= add_XML_value("lastsubmission",$SubProject->GetLastSubmission());
+      $xml .= add_XML_value("lastsubmission",$lastSubmission);
       }
     $xml .= "</subproject>";
 
